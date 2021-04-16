@@ -473,37 +473,38 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation
 <p> <strong>(i + j)的实际意义就是最小的那个数在并集中移动的次数</strong>。</p>
 <p>当走了 len - 1 次的时候，取A[i]和B[j]中最小值，即（不考虑重复元素时）A和B的中位数。</p>
 <blockquote>
-<p>后来考虑到了如果最后一步是A[i] == B[j]，则算走了len次，但因为取最小值，所以不影响结果。</p>
+<p>如果最后一步是A[i] == B[j]，也可以通过减去1来实现正常移动 — 详见后面解析。</p>
 </blockquote>
 <p>则此时， <strong>(&lt; len - 1)的实际意义就是最小的那个数到达中位数应当移动的次数。</strong></p>
-<p>如果此时，将重复元素考虑进去，那么为了表示&lt;最小的那个数在并集中移动的次数&gt;和&lt;最小的那个数到达中位数应当移动的次数&gt;:<br>我引入了一个新的变量k，用于记录重复元素。<br>当 满足条件A[i] == B[j]后，多执行一条<code>k++;</code>  此时，<strong>记录变量k的数值相当于重复元素的个数</strong>。<br>（相当于并集的重复元素的删除操作，且不影响空间效率和时间效率）</p>
-<p>于是：<br><strong>&lt;最小的那个数在并集中移动的次数&gt;可以用(i + j - k)来表示。</strong>【因为并集中重复元素不存在】<br><strong>&lt;最小的那个数到达中位数应当移动的次数&gt;可以用 ( &lt; ( len * 2 - k ) / 2 - 1 )来表示。</strong>【 ( 2 * len - k ) 就是 并集的实际长度】</p>
+<p>如果此时，将重复元素考虑进去，那么为了表示&lt;最小的那个数在并集中移动的次数&gt;和&lt;最小的那个数到达中位数应当移动的次数&gt;:<br>我引入了一个新的变量k和m，分别用于记录重复元素总个数和走过的重复元素个数。<br>当 满足条件A[i] == B[j]后，多执行一条<code>m++;</code>  此时，<strong>记录变量m的数值相当于多走的次数</strong>。<br>（相当于并集的重复元素的删除操作，且不影响空间效率和时间效率）</p>
+<p>于是：<br><strong>&lt;最小的那个数在并集中移动的次数&gt;可以用(i + j - m)来表示。</strong>【因为并集中重复元素不存在】<br><strong>&lt;最小的那个数到达中位数应当移动的次数&gt;可以用 (ceil(((2 * len) - k )/ 2.f) - 1)来表示。</strong>【 ( 2 * len - k ) 就是 并集的实际长度】</p>
 <p>至此，让我们再对之前思路进行修改：</p>
-<p>让 i(初始化0) 和 j(初始化0) 分别遍历A和B进行循环<br> (循环条件为 <code>i + j - k &lt; (len * 2 - k) / 2 - 1</code><br>【等于(len * 2 - k) / 2也可以，因为两数相等之后又取了一个更大的数，不影响取中位数】</p>
+<p>让 i(初始化0) 和 j(初始化0) 分别遍历A和B进行循环<br> (循环条件为 <code>i + j - m != ceil(((2 * len) - k )/ 2.f) - 1</code>)</p>
 <p>a) 当<code>A[i] &gt; B[j]</code>时， <code>j++</code>;</p>
 <p>b) 当<code>A[i] &lt; B[j]</code>时， <code>i++</code>;</p>
-<p>c) 当<code>A[i] == B[j]</code>时，<code>i++</code>;<code>j++</code>;<code>k++</code>;</p>
+<p>c) 当<code>A[i] == B[j]</code>时，<code>i++</code>;<code>j++</code>;<code>m++</code>;</p>
 <p>此时，判断A[i]或者B[j]，谁小谁就是中位数。</p>
 <h1 id="5-最优解的代码实现"><a href="#5-最优解的代码实现" class="headerlink" title="5.最优解的代码实现"></a>5.最优解的代码实现</h1><hr>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/* Start to search */</span>
-i <span class="token operator">=</span> j <span class="token operator">=</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// k For recording Duplicate numbers</span>
-<span class="token keyword">int</span> len <span class="token operator">=</span> list1<span class="token punctuation">.</span><span class="token function">GetLen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">+</span> j <span class="token operator">-</span> k <span class="token operator">&lt;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> len<span class="token punctuation">)</span> <span class="token operator">-</span> k <span class="token punctuation">)</span><span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">// Targets found</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>list1<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">></span> list2<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        j<span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>list1<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&lt;</span> list2<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        i<span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span>
+    i <span class="token operator">=</span> j <span class="token operator">=</span> m <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> len <span class="token operator">=</span> list1<span class="token punctuation">.</span><span class="token function">GetLen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// record the length</span>
+    k <span class="token operator">=</span> <span class="token function">SameNum</span><span class="token punctuation">(</span>list1<span class="token punctuation">,</span> list2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span> i <span class="token operator">+</span> j <span class="token operator">-</span> m <span class="token operator">!=</span> <span class="token function">ceil</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> len<span class="token punctuation">)</span> <span class="token operator">-</span> k <span class="token punctuation">)</span><span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">.</span>f<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token comment" spellcheck="true">// targets found</span>
     <span class="token punctuation">{</span>
-        i<span class="token operator">++</span><span class="token punctuation">;</span>
-        j<span class="token operator">++</span><span class="token punctuation">;</span>
-        k<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>list1<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">></span> list2<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            j<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>list1<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&lt;</span> list2<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            i<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            i<span class="token operator">++</span><span class="token punctuation">;</span>
+            j<span class="token operator">++</span><span class="token punctuation">;</span>
+            m<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Median of them is "</span><span class="token punctuation">;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>list1<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&lt;</span> list2<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token operator">?</span> list1<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">:</span> list2<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// the smaller one is the median</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Median of them is "</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>list1<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">&lt;</span>list2<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token operator">?</span>list1<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">:</span>list2<span class="token punctuation">.</span><span class="token function">IndexSearch</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// the smaller one is the median</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>至此，整个答案的优化已经完成。</p>
 <ul>
 <li><strong>不需要考虑奇偶</strong></li>
@@ -611,12 +612,12 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation
                         <span class="chip bg-color">学习记录</span>
                     </a>
                     
-                    <a href="/tags/%E9%80%92%E5%BD%92%E4%B8%8E%E5%9B%9E%E6%BA%AF/">
-                        <span class="chip bg-color">递归与回溯</span>
-                    </a>
-                    
                     <a href="/tags/%E7%AE%80%E5%8D%95%E7%AE%97%E6%B3%95/">
                         <span class="chip bg-color">简单算法</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%80%92%E5%BD%92%E4%B8%8E%E5%9B%9E%E6%BA%AF/">
+                        <span class="chip bg-color">递归与回溯</span>
                     </a>
                     
                 </div>
