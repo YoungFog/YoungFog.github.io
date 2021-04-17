@@ -433,7 +433,7 @@
 </blockquote>
 <h2 id="1-栈类的创建"><a href="#1-栈类的创建" class="headerlink" title="1. 栈类的创建"></a>1. 栈类的创建</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">ElementType</span><span class="token operator">></span>
 <span class="token keyword">class</span> <span class="token class-name">seqStack</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
 <span class="token keyword">private</span><span class="token operator">:</span>
     ElementType<span class="token operator">*</span> Data<span class="token punctuation">;</span>
     <span class="token keyword">int</span> top<span class="token punctuation">;</span>
@@ -444,18 +444,18 @@
     ElementType <span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 出栈</span>
     <span class="token keyword">int</span> <span class="token function">GetTop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 得到栈顶的值</span>
     ElementType <span class="token function">GetTopNum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 得到栈顶的元素的值</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">void</span> <span class="token function">Print</span><span class="token punctuation">(</span>seqStack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//输出栈的序列</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="2-核心【递归-回溯】"><a href="#2-核心【递归-回溯】" class="headerlink" title="2. 核心【递归 + 回溯】"></a>2. 核心【递归 + 回溯】</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">Proccess</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> array<span class="token punctuation">,</span> <span class="token keyword">int</span> num<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">static</span> <span class="token keyword">int</span> number <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 记录结果的个数</span>
     <span class="token keyword">static</span> seqStack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> S<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 栈的创建</span>
     <span class="token keyword">int</span> tmp<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 用于pop后的回溯</span>
     <span class="token comment" spellcheck="true">/* 结束递归 */</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">==</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">// 所有元素都已完成入栈操作[即n处理完成]</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         number<span class="token operator">++</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 结果个数+1</span>
         cout <span class="token operator">&lt;&lt;</span> <span class="token string">"NO."</span> <span class="token operator">&lt;&lt;</span> number <span class="token operator">&lt;&lt;</span> <span class="token string">" is: "</span><span class="token punctuation">;</span>
         <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">// 0 即空</span>
@@ -463,28 +463,28 @@
         <span class="token function">Print</span><span class="token punctuation">(</span>S<span class="token punctuation">)</span><span class="token punctuation">;</span>
         cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">/* 一条分支结束 */</span>
-    <span class="token punctuation">}</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/* 未达成结束条件，进行 待入栈数据的push 和 已入栈数据的pop */</span>
     <span class="token keyword">else</span>
-    <span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token comment" spellcheck="true">/* 1.Push */</span>
         S<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">Proccess</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> array<span class="token punctuation">,</span> num <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 对下一个数据进行递归处理</span>
         S<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 回溯</span>
         <span class="token comment" spellcheck="true">/* 2.Pop */</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>S<span class="token punctuation">.</span><span class="token function">GetTop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">// pop的前提是栈不空</span>
-        <span class="token punctuation">{</span>
+        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
             tmp <span class="token operator">=</span> S<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             array<span class="token punctuation">[</span>num <span class="token operator">-</span> S<span class="token punctuation">.</span><span class="token function">GetTop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> tmp<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 记录已出栈元素</span>
             <span class="token function">Proccess</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> array<span class="token punctuation">,</span> num<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 继续对该数据进行递归处理【尚未入栈】</span>
             array<span class="token punctuation">[</span>num <span class="token operator">-</span> S<span class="token punctuation">.</span><span class="token function">GetTop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 数组的回溯</span>
             S<span class="token punctuation">.</span><span class="token function">Push</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 栈的回溯</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="3-回归题目"><a href="#3-回归题目" class="headerlink" title="3. 回归题目"></a>3. 回归题目</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">int</span> n<span class="token punctuation">;</span>
     cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Please input the value of n: "</span><span class="token punctuation">;</span>
     cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
@@ -492,7 +492,7 @@
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">// 初始化数组</span>
         array<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token function">Proccess</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> array<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 从 1 开始递归 [n 结束]</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>至此，整个题目完成</p>
 <p><strong>拓展</strong>：为了解决入栈序列为{ 3, 7, 9, 2, 4 }之类不规律的问题，只需稍加修改。<br>           将 1–n 变为 TitleArray[0] – TitleArray[n - 1]即可实现，核心算法不变。</p>
