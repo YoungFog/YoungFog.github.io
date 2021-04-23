@@ -400,13 +400,13 @@ header nav .brand-span {
 }
 
 header .brand-logo .logo-img {
-    height: 45px;
+    height: 35px;
     vertical-align: middle;
-    padding-bottom: 7px;
+    padding-bottom: 3px;
 }
 
 header .brand-logo .logo-span {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 /*修改顶部 logo 的文字垂直对齐为 top，避免默认 middle 看起来偏下*/
@@ -684,7 +684,7 @@ header .go-back i {
 }
 
 .bg-cover .title {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     line-height: 1.2em;
     margin-bottom: 20px;
     position: relative;
