@@ -382,7 +382,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="浅谈指针和引用"><a href="#浅谈指针和引用" class="headerlink" title="浅谈指针和引用"></a>浅谈指针和引用</h1><hr>
-<h3 id="1-指针"><a href="#1-指针" class="headerlink" title="1. 指针"></a>1. 指针</h3><p>在 <em>The C++ Programming Language</em> 中，Bjarne说过：<code>一个声明是自右向左的</code>。</p>
+<h2 id="1-指针"><a href="#1-指针" class="headerlink" title="1. 指针"></a>1. 指针</h2><p>在 <em>The C++ Programming Language</em> 中，Bjarne说过：<code>一个声明是自右向左的</code>。</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">char</span><span class="token operator">*</span> <span class="token keyword">const</span> p<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// p is a const pointer to char</span>
 <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> p<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// p is a pointer to const char</span>
 <span class="token keyword">char</span> <span class="token keyword">const</span> <span class="token operator">*</span> p<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// p is a pointer to const char</span>
@@ -390,7 +390,7 @@
 <blockquote>
 <p>   对于第三条语句，因为const只能去结合类型，即结合char为const char, 所以和第二个是相同的定义类型。<br>   [ 因为单独的一个 ‘<em>‘ 不属于类型, 即不存在单独的 const</em> ]<br>   { 如果让我们再回头看第一条语句，其实就是 const 结合了一个类型 char* }</p>
 </blockquote>
-<h3 id="2-引用"><a href="#2-引用" class="headerlink" title="2.引用"></a>2.引用</h3><p>如果你不清楚引用对象是什么类型的，就<code>先去掉 &#39;&amp;&#39; 符号，剩下的就是引用对象的类型</code>。</p>
+<h2 id="2-引用"><a href="#2-引用" class="headerlink" title="2. 引用"></a>2. 引用</h2><p>如果你不清楚引用对象是什么类型的，就<code>先去掉 &#39;&amp;&#39; 符号，剩下的就是引用对象的类型</code>。</p>
 <p>比如:  const int &amp; 是在引用const int类型的变量。<br>           const int* &amp; 是在引用const int*类型的变量，即我们常说的<strong>常引用</strong>。</p>
 <p>再看下面的例子，进一步理解”常引用“。</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/* 定义 */</span>
@@ -609,12 +609,12 @@ p2 <span class="token operator">=</span> <span class="token constant">NULL</span
                         <span class="chip bg-color">学习记录</span>
                     </a>
                     
-                    <a href="/tags/%E9%80%92%E5%BD%92%E4%B8%8E%E5%9B%9E%E6%BA%AF/">
-                        <span class="chip bg-color">递归与回溯</span>
-                    </a>
-                    
                     <a href="/tags/%E7%AE%80%E5%8D%95%E7%AE%97%E6%B3%95/">
                         <span class="chip bg-color">简单算法</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%80%92%E5%BD%92%E4%B8%8E%E5%9B%9E%E6%BA%AF/">
+                        <span class="chip bg-color">递归与回溯</span>
                     </a>
                     
                 </div>
