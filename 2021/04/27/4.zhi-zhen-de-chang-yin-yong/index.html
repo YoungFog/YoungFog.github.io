@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Const与&#39;&amp;&#39;与&#39;*&#39;的花样组合, 殃雾的个人博客">
+    <meta name="keywords" content="Const与&amp;与*的花样组合, 殃雾的个人博客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Const与&#39;&amp;&#39;与&#39;*&#39;的花样组合 | 殃雾的个人博客</title>
+    <title>Const与&amp;与*的花样组合 | 殃雾的个人博客</title>
     <link rel="icon" type="image/png" href="https://gitee.com/Yang_WuYa/hexo-picture/raw/master/D:%5CBLOG%5Cthemes%5Chexo-theme-matery-master%5Csource/logo.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -228,7 +228,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Const与&#39;&amp;&#39;与&#39;*&#39;的花样组合</h1>
+                    <h1 class="description center-align post-title">Const与&amp;与*的花样组合</h1>
                 </div>
             </div>
         </div>
@@ -388,29 +388,30 @@
 <span class="token keyword">char</span> <span class="token keyword">const</span> <span class="token operator">*</span> p<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// p is a pointer to const char</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <blockquote>
-<p>   对于第三条语句，因为const只能去结合类型，即结合char为const char, 所以和第二个是相同的定义类型。<br>   [ 因为单独的一个 * 不属于类型, 即不存在单独的 const* ]<br>   { 如果让我们再回头看第一条语句，其实就是 const 结合了一个类型 char* }</p>
+<p>   对于第三条语句，因为const要去结合类型，即结合char为const char, 所以和第二个是相同的定义类型。<br>   [ 因为单独的一个 * 不属于类型, 即不存在单独的 const* ]<br>   { 如果让我们再回头看第一条语句，其实就是 const 结合了一个类型 char* }</p>
 </blockquote>
-<h2 id="2-引用"><a href="#2-引用" class="headerlink" title="2. 引用"></a>2. 引用</h2><p>如果你不清楚引用对象是什么类型的，就<code>先去掉 &#39;&amp;&#39; 符号，剩下的就是引用对象的类型</code>。</p>
-<p>比如:  const int &amp; 是在引用const int类型的变量。<br>           const int* &amp; 是在引用const int*类型的变量，即我们常说的<strong>常引用</strong>。</p>
+<h2 id="2-引用"><a href="#2-引用" class="headerlink" title="2. 引用"></a>2. 引用</h2><p>如果你不清楚引用对象是什么类型的，就<code>(假设可以这样理解)先去掉 &#39;&amp;&#39; 符号，剩下的就是引用对象的类型</code>。</p>
+<p>比如:  const int &amp; 是在引用const int类型的变量。</p>
+<p>​           const int* &amp; 是在引用const int*类型的变量。</p>
+<p>​           那么int * const&amp; 是在引用什么呢？</p>
+<blockquote>
+<p>对于int* const &amp;来说，如果按上面的思路，似乎是在引用 指向int的常指针。<br><strong>但引用一个常量，是没有意义的。</strong><br>所以，该引用应该被理解为<strong>常引用</strong>。<br>当A常引用B时，只能通过A使用B的值，不能通过A修改B。而A仍随B的变化而变化。</p>
+</blockquote>
 <p>再看下面的例子，进一步理解”常引用“。</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/* 定义 */</span>
-<span class="token keyword">const</span> <span class="token keyword">int</span><span class="token operator">&amp;</span> A <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token operator">&amp;</span> B <span class="token operator">=</span> b<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span><span class="token operator">&amp;</span> A <span class="token operator">=</span> a<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 不能引用常量，所以是常引用</span>
+<span class="token keyword">int</span><span class="token operator">&amp;</span> B <span class="token operator">=</span> b<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 普通引用</span>
 
 <span class="token comment" spellcheck="true">/* 赋值 */</span>
-B <span class="token operator">=</span> A<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// Success</span>
+a <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> A<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// OutPut: 30</span>
 A <span class="token operator">=</span> B<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// Fail</span>
+B <span class="token operator">=</span> A<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// Success</span>
 <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;</span><span class="token punctuation">)</span>A <span class="token operator">=</span> B<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//Success</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>最后一条语句可以这样理解：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">&amp;</span><span class="token punctuation">)</span>A <span class="token operator">=</span> B<span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">//等价于以下语句</span>
-
-<span class="token keyword">int</span><span class="token operator">&amp;</span> tmp <span class="token operator">=</span> B<span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token keyword">int</span><span class="token operator">&amp;</span> A <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">int</span><span class="token punctuation">)</span>tmp<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="三者的交叉使用"><a href="#三者的交叉使用" class="headerlink" title="三者的交叉使用"></a>三者的交叉使用</h1><hr>
 <p>接着，让我们看三个例子，来具体地理解一下。</p>
 <p>首先，对所有例子都有：<br>   <code>char c = &#39;0&#39;;</code></p>
@@ -448,9 +449,11 @@ p2 <span class="token operator">=</span> <span class="token constant">NULL</span
 <span class="token comment" spellcheck="true">/* 赋值 */</span>
 <span class="token operator">*</span>p2 <span class="token operator">=</span> <span class="token string">'1'</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// Success</span>
 p2 <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// Fail</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token string">'1'</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// Success</span>
+p1 <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// Success</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
-<p>结果：成功传递，且两次赋值分别失败、成功。<br>即p2是常引用（引用对象是：指向char的常指针 ）</p>
+<p>结果：成功传递，且两次赋值分别失败、成功。<br>即p2是常引用（引用对象是：指向char的指针 ）</p>
 </blockquote>
 <h1 id="lt-常引用-gt-的常见用途"><a href="#lt-常引用-gt-的常见用途" class="headerlink" title="&lt;常引用&gt;的常见用途"></a>&lt;常引用&gt;的常见用途</h1><hr>
 <ol>
@@ -460,6 +463,9 @@ p2 <span class="token operator">=</span> <span class="token constant">NULL</span
 <li><p>  <em>如果不用引用，对于结构类型的参数传递效率可能会很低。</em></p>
 </li>
 <li><p><em>如果不用 const，则原对象可能会修改。</em></p>
+<p>尤其注意——<strong>指针的常引用</strong>容易写错。</p>
+<p>比如:</p>
+<p><code>const char* &amp; A = B;    // 不是常引用</code><br><code>char* const &amp; A = B;    // 是常引用</code></p>
 </li>
 </ul>
 <ol start="2">
@@ -534,9 +540,9 @@ p2 <span class="token operator">=</span> <span class="token constant">NULL</span
                 <a href="/2021/04/27/4.zhi-zhen-de-chang-yin-yong/">
                     <div class="card-image">
                         
-                        <img src="https://gitee.com/Yang_WuYa/hexo-picture/raw/master/D:%5CBLOG%5Cthemes%5Chexo-theme-matery-master%5Csource/2.jpg" class="responsive-img" alt="Const与&#39;&amp;&#39;与&#39;*&#39;的花样组合">
+                        <img src="https://gitee.com/Yang_WuYa/hexo-picture/raw/master/D:%5CBLOG%5Cthemes%5Chexo-theme-matery-master%5Csource/2.jpg" class="responsive-img" alt="Const与&amp;与*的花样组合">
                         
-                        <span class="card-title">Const与&#39;&amp;&#39;与&#39;*&#39;的花样组合</span>
+                        <span class="card-title">Const与&amp;与*的花样组合</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
