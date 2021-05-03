@@ -15,20 +15,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
-<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-    gtag('config', '');
-</script>
-
 
     <title>Const与&amp;与*的花样组合 | 殃雾的个人博客</title>
-    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/YoungFog/images/img/logo.png">
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/YoungFog/images/img/LOGO.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -53,7 +42,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
 					
-					<img src="https://cdn.jsdelivr.net/gh/YoungFog/images/img/logo.png" class="logo-img" alt="LOGO">
+					<img src="https://cdn.jsdelivr.net/gh/YoungFog/images/img/LOGO.png" class="logo-img" alt="LOGO">
 					
 					<span class="logo-span">殃雾的个人博客</span>
                 </a>
@@ -80,7 +69,18 @@
       
       <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
-      <span>文章标签</span>
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>阶段</span>
     </a>
     
   </li>
@@ -92,17 +92,6 @@
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
       
       <span>时光机</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于我</span>
     </a>
     
   </li>
@@ -130,7 +119,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="https://cdn.jsdelivr.net/gh/YoungFog/images/img/logo.png" class="logo-img circle responsive-img">
+        <img src="https://cdn.jsdelivr.net/gh/YoungFog/images/img/LOGO.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">殃雾的个人博客</div>
         <div class="logo-desc">
@@ -161,7 +150,18 @@
 			
 			    <i class="fa-fw fas fa-tags"></i>
 			
-			文章标签
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			阶段
 		</a>
           
         </li>
@@ -173,17 +173,6 @@
 			    <i class="fa-fw fas fa-archive"></i>
 			
 			时光机
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于我
 		</a>
           
         </li>
@@ -408,6 +397,15 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%A4%A7%E4%B8%80%E4%B8%8B/" class="post-category">
+                                大一下
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
@@ -611,8 +609,12 @@ p1 <span class="token operator">=</span> <span class="token constant">NULL</span
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Ven_殃雾
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%A4%A7%E4%B8%80%E4%B8%8B/" class="post-category">
+                                    大一下
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -655,8 +657,12 @@ p1 <span class="token operator">=</span> <span class="token constant">NULL</span
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Ven_殃雾
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%A4%A7%E4%B8%80%E4%B8%8B/" class="post-category">
+                                    大一下
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -985,16 +991,6 @@ $(function () {
     <script src="/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
-
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
 
     <!-- Baidu Push -->
 
